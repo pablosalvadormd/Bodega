@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Del alto valle — Bodega y Viñedos</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ivory: #F8F6F1;
+      --dark: #2C2824;
+      --stone: #8B7355;
+      --text-secondary: #6B6560;
+      --warm-gray: #EDEAE4;
+      --divider: #D4CDC3;
+      --serif: 'Instrument Serif', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: auto; /* handled by Lenis */ }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--ivory);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 64px;
+      background: var(--ivory);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+
+    .nav.scrolled {
+      background: rgba(248, 246, 241, 0.85);
+      backdrop-filter: blur(20px);
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      text-decoration: none;
+    }
+
+    .nav-logo-top {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 400;
+      color: var(--dark);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .nav-logo-main {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--dark);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .nav-logo-sub {
+      font-family: var(--sans);
+      font-size: 7px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      line-height: 2;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--dark); }
+
+    .nav-cta {
+      display: flex;
+      padding: 10px 24px;
+      background: var(--dark);
+      border-radius: 4px;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      color: var(--ivory) !important;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.3s;
+    }
+
+    .nav-cta:hover { background: #1a1815; }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 0 64px;
+      padding-top: 106px; /* space for fixed nav */
+    }
+
+    .hero-image-wrapper {
+      flex: 1;
+      min-height: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      will-change: transform, border-radius;
+      position: relative;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.08);
+      will-change: transform;
+    }
+
+    .hero-text {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 28px 0 32px;
+      flex-shrink: 0;
+      will-change: opacity, transform;
+    }
+
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: 64px;
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      max-width: 680px;
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 480px;
+      align-items: flex-end;
+    }
+
+    .hero-description {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      text-align: right;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      padding: 12px 28px;
+      background: var(--dark);
+      border-radius: 4px;
+      color: var(--ivory);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .btn-primary:hover { background: #1a1815; transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      padding: 12px 28px;
+      border: 1px solid var(--dark);
+      border-radius: 4px;
+      color: var(--dark);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .btn-secondary:hover { background: var(--dark); color: var(--ivory); transform: translateY(-1px); }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--stone);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 400;
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+    }
+
+    /* TERROIR */
+    .terroir {
+      background: var(--dark);
+      padding: 120px 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      margin-bottom: -1px; /* prevent subpixel gap */
+    }
+
+    .terroir-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 80px;
+    }
+
+    .terroir-title {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--ivory);
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+      max-width: 520px;
+      flex-shrink: 0;
+    }
+
+    .terroir-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 580px;
+    }
+
+    .terroir-text {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(248, 246, 241, 0.65);
+      line-height: 1.75;
+    }
+
+    .text-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--stone);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .text-link:hover { color: #a68a65; }
+
+    /* TERROIR PHOTOS */
+    .terroir-photos {
+      display: flex;
+      width: 100%;
+      height: 560px;
+      overflow: hidden;
+      background: var(--ivory);
+    }
+
+    .terroir-photos .terroir-photo-wrap {
+      flex: 1;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .terroir-photos img {
+      width: 100%;
+      height: 130%;
+      object-fit: cover;
+      display: block;
+      margin-top: -15%;
+    }
+
+    /* WOW NUMBERS */
+    .numbers {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 0 100px;
+      gap: 64px;
+      background: var(--ivory);
+    }
+
+    .numbers-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .numbers-tagline {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--dark);
+      text-align: center;
+    }
+
+    .numbers-grid {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 64px;
+    }
+
+    .number-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .number-value {
+      font-family: var(--serif);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      line-height: 0.85;
+    }
+
+    .number-label {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--dark);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* VINOS */
+    .vinos {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 80px 64px;
+      gap: 48px;
+      background: var(--warm-gray);
+    }
+
+    .vinos-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .vinos-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .vinos-grid {
+      display: flex;
+      gap: 20px;
+    }
+
+    .vino-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .vino-image {
+      display: flex;
+      height: 400px;
+      background: var(--ivory);
+      border-radius: 6px;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .vino-card:hover .vino-image {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    .vino-image img {
+      height: 280px;
+      width: auto;
+      object-fit: contain;
+      transition: transform 0.5s ease;
+    }
+
+    .vino-card:hover .vino-image img { transform: scale(1.05); }
+
+    .vino-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 26px 4px 0;
+      gap: 12px;
+    }
+
+    .vino-name {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .vino-desc {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .vino-arrow {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+
+    .vino-arrow svg {
+      width: 14px;
+      height: 14px;
+      color: var(--stone);
+      transition: color 0.3s;
+    }
+
+    .vino-card:hover .vino-arrow {
+      background: var(--dark);
+      border-color: var(--dark);
+      transform: translateX(2px);
+    }
+
+    .vino-card:hover .vino-arrow svg { color: var(--ivory); }
+
+    /* EXPERIENCIAS */
+    .experiencias {
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+      padding: 0 64px;
+      gap: 80px;
+      background: var(--ivory);
+    }
+
+    .experiencias-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .experiencias-header {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .experiencias-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      max-width: 480px;
+    }
+
+    .activities {
+      display: flex;
+      flex-direction: column;
+      padding-top: 16px;
+    }
+
+    .activity-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-top: 1px solid var(--divider);
+      transition: padding-left 0.3s;
+    }
+
+    .activity-row:last-child { border-bottom: 1px solid var(--divider); }
+    .activity-row:hover { padding-left: 8px; }
+
+    .activity-info { display: flex; flex-direction: column; gap: 4px; }
+
+    .activity-name {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .activity-detail {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .activity-cta {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--stone);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .activity-cta:hover { color: #a68a65; }
+
+    .experiencias-image {
+      flex: 1;
+      height: 700px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .experiencias-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .experiencias-image:hover img { transform: scale(1.03); }
+
+    /* QUOTE */
+    .quote {
+      position: relative;
+      height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--dark);
+    }
+
+    .quote-bg {
+      position: absolute;
+      top: -15%;
+      left: 0;
+      width: 100%;
+      height: 130%;
+      object-fit: cover;
+    }
+
+    .quote-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.75));
+    }
+
+    .quote-bg {
+      filter: contrast(1.15) saturate(1.2);
+    }
+
+    .quote-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      max-width: 800px;
+      padding: 0 64px;
+    }
+
+    .quote-text {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ivory);
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .quote-author {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--stone);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      background: var(--ivory);
+    }
+
+    .footer-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 320px;
+    }
+
+    .footer-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: fit-content;
+    }
+
+    .footer-brand-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .footer-email {
+      font-size: 14px;
+      color: var(--stone);
+      text-decoration: none;
+    }
+
+    .footer-email:hover { text-decoration: underline; }
+
+    .footer-nav {
+      display: flex;
+      gap: 80px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--stone);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .footer-col a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      line-height: 2;
+      transition: color 0.3s;
+    }
+
+    .footer-col a:hover { color: var(--dark); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: #A09890;
+    }
+
+    /* CUSTOM CURSOR */
+    .hero-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--ivory);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      will-change: transform;
+    }
+
+    .hero-cursor svg {
+      width: 18px;
+      height: 18px;
+      color: var(--dark);
+    }
+
+    .hero.cursor-active { cursor: none; }
+    .hero.cursor-active * { cursor: none; }
+    .hero.cursor-active a,
+    .hero.cursor-active button { cursor: pointer !important; }
+
+    /* REVEAL ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(40px); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); }
+    .reveal-right { opacity: 0; transform: translateX(40px); }
+    .reveal-scale { opacity: 0; transform: scale(0.95); }
+  </style>
+</head>
+<body>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="hero-cursor" id="heroCursor">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">
+      <img src="img/logo.png" alt="Del alto valle — Bodega y Viñedos" style="height: 44px; width: auto;">
+    </a>
+    <div class="nav-links">
+      <a href="#terroir">Nosotros</a>
+      <a href="#vinos">Vinos</a>
+      <a href="#terroir">Establecimiento</a>
+      <a href="#experiencias">Visitas</a>
+      <a href="#experiencias" class="nav-cta">Reservar visita</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-image-wrapper" id="heroImageWrapper">
+        <img src="img/herox2.jpg" alt="Viñedos en la Sierra de la Ballena" class="hero-image" id="heroImage">
+      </div>
+      <div class="hero-text" id="heroText">
+        <h1 class="hero-headline">Donde la tierra<br>encuentra el mar</h1>
+        <div class="hero-right">
+          <p class="hero-description">Una pequeña bodega que definió nuevos rumbos en la vitivinicultura uruguaya. Sierra de la Ballena, Maldonado.</p>
+          <div class="hero-buttons">
+            <a href="#vinos" class="btn-primary">Descubrir vinos</a>
+            <a href="#experiencias" class="btn-secondary">Reservar visita</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERROIR -->
+  <section class="terroir" id="terroir">
+    <span class="section-label" style="color: var(--stone);">El Terroir</span>
+    <div class="terroir-content">
+      <h2 class="terroir-title reveal-left">Un terroir sin igual en la sierra más inesperada de Uruguay</h2>
+      <div class="terroir-right">
+        <p class="terroir-text reveal-right">Del alto valle es una pequeña bodega que definió nuevos rumbos en la vitivinicultura uruguaya, iniciando sus plantaciones en el año 2001. Enclavada en la Sierra de la Ballena, a 15 kilómetros de la costa, conjuga aires oceánicos y suelos serranos.</p>
+        <p class="terroir-text reveal-right">Son algo más de 8 hectáreas de Merlot, Tannat, Cabernet Franc, Syrah y Viognier, para una producción limitada de vinos de alta calidad.</p>
+        <a href="#" class="text-link reveal-right">Conocer nuestra historia →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERROIR PHOTOS -->
+  <section class="terroir-photos" id="terroirPhotos">
+    <div class="terroir-photo-wrap">
+      <img src="img/terroir-1.jpeg" alt="Viñedos en la Sierra de la Ballena">
+    </div>
+    <div class="terroir-photo-wrap">
+      <img src="img/terroir-2.jpeg" alt="Vino y gastronomía sobre piedra">
+    </div>
+  </section>
+
+  <!-- WOW NUMBERS -->
+  <section class="numbers" id="numbers">
+    <div class="numbers-header">
+      <span class="section-label reveal">La bodega en números</span>
+      <p class="numbers-tagline reveal">Pequeña en escala, grande en carácter</p>
+    </div>
+    <div class="numbers-grid">
+      <div class="number-item">
+        <span class="number-value" style="font-size: 120px; color: var(--divider);" data-target="2001" data-is-year="true">0</span>
+        <span class="number-label">Fundación</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value" style="font-size: 180px; color: var(--dark);" data-target="170">0</span>
+        <span class="number-label">Metros sobre el mar</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value" style="font-size: 220px; color: var(--dark);" data-target="8">0</span>
+        <span class="number-label">Hectáreas</span>
+      </div>
+      <div class="number-item">
+        <span class="number-value" style="font-size: 220px; color: var(--stone);" data-target="5">0</span>
+        <span class="number-label">Cepas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- VINOS -->
+  <section class="vinos" id="vinos">
+    <div class="vinos-header">
+      <div class="vinos-header-left">
+        <span class="section-label reveal">Nuestros Vinos</span>
+        <h2 class="section-title reveal">Intensidad y equilibrio</h2>
+      </div>
+      <a href="#" class="text-link reveal">Ver todos los vinos →</a>
+    </div>
+    <div class="vinos-grid">
+      <a class="vino-card reveal" href="#">
+        <div class="vino-image">
+          <img src="img/bottle-merlot.png" alt="Merlot Reserva" style="height: 280px; width: auto; object-fit: contain;">
+        </div>
+        <div class="vino-info">
+          <div>
+            <h3 class="vino-name">Merlot</h3>
+            <p class="vino-desc">Nuestra cepa insignia. Fruta negra, taninos firmes, final mineral.</p>
+          </div>
+          <div class="vino-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+      <a class="vino-card reveal" href="#">
+        <div class="vino-image">
+          <img src="img/bottle-tannat-blend.png" alt="Tannat Merlot Cabernet Franc" style="height: 280px; width: auto; object-fit: contain;">
+        </div>
+        <div class="vino-info">
+          <div>
+            <h3 class="vino-name">Tannat Merlot Cabernet Franc</h3>
+            <p class="vino-desc">Blend insignia. Elegancia y estructura en cada copa.</p>
+          </div>
+          <div class="vino-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+      <a class="vino-card reveal" href="#">
+        <div class="vino-image">
+          <img src="img/bottle-viognier.png" alt="Viognier" style="height: 280px; width: auto; object-fit: contain;">
+        </div>
+        <div class="vino-info">
+          <div>
+            <h3 class="vino-name">Viognier</h3>
+            <p class="vino-desc">Flores blancas, durazno, acidez vibrante.</p>
+          </div>
+          <div class="vino-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+      <a class="vino-card reveal" href="#">
+        <div class="vino-image">
+          <img src="img/bottle-cabfranc.png" alt="Cabernet Franc Reserva" style="height: 280px; width: auto; object-fit: contain;">
+        </div>
+        <div class="vino-info">
+          <div>
+            <h3 class="vino-name">Cabernet Franc</h3>
+            <p class="vino-desc">Especiado, fresco, con notas herbales.</p>
+          </div>
+          <div class="vino-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIAS -->
+  <section class="experiencias" id="experiencias">
+    <div class="experiencias-left">
+      <div class="experiencias-header">
+        <span class="section-label reveal">Experiencias</span>
+        <h2 class="section-title reveal">Vení a conocer la sierra</h2>
+      </div>
+      <p class="experiencias-desc reveal">Degustaciones, almuerzos al aire libre bajo los pinos, atardeceres frente al valle. Una experiencia íntima en uno de los paisajes más singulares de Uruguay.</p>
+      <div class="activities">
+        <div class="activity-row reveal">
+          <div class="activity-info">
+            <span class="activity-name">Degustación clásica</span>
+            <span class="activity-detail">Recorrido + 4 vinos</span>
+          </div>
+          <a href="#" class="activity-cta">Reservar</a>
+        </div>
+        <div class="activity-row reveal">
+          <div class="activity-info">
+            <span class="activity-name">Almuerzo en la sierra</span>
+            <span class="activity-detail">Cocina al fuego + maridaje</span>
+          </div>
+          <a href="#" class="activity-cta">Reservar</a>
+        </div>
+        <div class="activity-row reveal">
+          <div class="activity-info">
+            <span class="activity-name">Fogón de Vendimia</span>
+            <span class="activity-detail">Evento especial de vendimia</span>
+          </div>
+          <a href="#" class="activity-cta">Reservar</a>
+        </div>
+      </div>
+    </div>
+    <div class="experiencias-image reveal-right">
+      <img src="img/experiencias.jpeg" alt="Experiencia en Del alto valle">
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote" id="quote">
+    <img src="img/quote-bg.jpeg" alt="" class="quote-bg" id="quoteBg">
+    <div class="quote-overlay"></div>
+    <div class="quote-content">
+      <p class="quote-text reveal">"Cualquier entendido en vino nota a primera vista que la Sierra de la Ballena es un terroir especial"</p>
+      <span class="quote-author reveal">André Dominé — Uruguay, Vinos Únicos</span>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-divider"></div>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="img/logo.png" alt="Del alto valle — Bodega y Viñedos" style="height: 40px; width: auto;">
+        </div>
+        <p class="footer-brand-desc">Bodega boutique enclavada en la Sierra de la Ballena, a 15 km de la costa atlántica. Maldonado, Uruguay.</p>
+        <a href="mailto:visitas@bodegadelaltovalle.com" class="footer-email">visitas@bodegadelaltovalle.com</a>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <span class="footer-col-title">Navegar</span>
+          <a href="#">Nosotros</a>
+          <a href="#">Vinos</a>
+          <a href="#">Establecimiento</a>
+          <a href="#">Visitas</a>
+          <a href="#">Contacto</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Seguinos</span>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 Del alto valle. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ─── ENTRANCE ANIMATION ───
+    // Set initial states (hidden)
+    gsap.set("#nav", { opacity: 0, y: -20 });
+    gsap.set("#heroImageWrapper", { opacity: 0, scale: 0.97 });
+    gsap.set(".hero-headline", { opacity: 0, y: 30 });
+    gsap.set(".hero-description", { opacity: 0, y: 20 });
+    gsap.set(".hero-buttons", { opacity: 0, y: 20 });
+
+    const entranceTl = gsap.timeline({
+      delay: 0.2,
+      defaults: { ease: "power3.out" }
+    });
+
+    entranceTl
+      .to("#heroImageWrapper", { opacity: 1, scale: 1, duration: 1.2 })
+      .to("#nav", { opacity: 1, y: 0, duration: 0.8 }, 0.3)
+      .to(".hero-headline", { opacity: 1, y: 0, duration: 0.9 }, 0.5)
+      .to(".hero-description", { opacity: 1, y: 0, duration: 0.8 }, 0.7)
+      .to(".hero-buttons", { opacity: 1, y: 0, duration: 0.8 }, 0.85);
+
+    // ─── NAV SCROLL EFFECT ───
+    ScrollTrigger.create({
+      start: "top -80",
+      onUpdate: (self) => {
+        document.getElementById('nav').classList.toggle('scrolled', self.progress > 0);
+      }
+    });
+
+    // ─── HERO IMAGE EXPANSION ON SCROLL ───
+    // Hero = 100vh. Image centered between nav and text.
+    // On scroll (pinned):
+    //   1. Text fades out + collapses to 0 height
+    //   2. Nav fades out
+    //   3. Side/top padding collapses to 0
+    //   4. Border-radius goes to 0
+    //   → Image fills entire 100vh × 100vw
+    //   5. Pin releases, full-bleed image scrolls up
+
+    const heroTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "+=150%", // extra scroll distance so full image lingers
+        scrub: 0.5,
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+      }
+    });
+
+    // Phase 1 (0 → 0.4): fade out text + nav
+    heroTl.to("#heroText", {
+      opacity: 0,
+      y: -20,
+      duration: 0.25,
+      ease: "none"
+    }, 0);
+
+    heroTl.to("#nav", {
+      opacity: 0,
+      y: -10,
+      duration: 0.2,
+      ease: "none"
+    }, 0.05);
+
+    // Phase 2 (0.2 → 0.9): collapse text height + all padding, expand image
+    heroTl.to("#heroText", {
+      height: 0,
+      padding: 0,
+      overflow: "hidden",
+      duration: 0.5,
+      ease: "power1.inOut"
+    }, 0.2);
+
+    heroTl.to(".hero-inner", {
+      paddingLeft: 0,
+      paddingRight: 0,
+      paddingTop: 0,
+      duration: 0.5,
+      ease: "power1.inOut"
+    }, 0.25);
+
+    heroTl.to("#heroImageWrapper", {
+      borderRadius: 0,
+      duration: 0.4,
+      ease: "power1.inOut"
+    }, 0.3);
+
+    // Zoom into the vineyards — feeling of entering
+    heroTl.to("#heroImage", {
+      scale: 1.35,
+      duration: 0.8,
+      ease: "power2.in"
+    }, 0.15);
+
+    // Phase 3: hold full-bleed image on screen (empty tween = pause)
+    heroTl.to({}, { duration: 0.4 });
+
+    // Bring nav back when terroir enters
+    ScrollTrigger.create({
+      trigger: ".terroir",
+      start: "top 90%",
+      onEnter: () => gsap.to("#nav", { opacity: 1, y: 0, duration: 0.4 }),
+      onLeaveBack: () => gsap.to("#nav", { opacity: 0, y: -10, duration: 0.3 }),
+    });
+
+    // ─── GENERAL REVEAL ANIMATIONS ───
+    gsap.utils.toArray('.reveal').forEach(el => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+
+    gsap.utils.toArray('.reveal-left').forEach(el => {
+      gsap.to(el, {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+
+    gsap.utils.toArray('.reveal-right').forEach(el => {
+      gsap.to(el, {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+
+    gsap.utils.toArray('.reveal-scale').forEach(el => {
+      gsap.to(el, {
+        opacity: 1,
+        scale: 1,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+
+    // ─── TERROIR PHOTOS PARALLAX ───
+    gsap.utils.toArray('.terroir-photo-wrap img').forEach(img => {
+      gsap.fromTo(img,
+        { yPercent: -5 },
+        {
+          yPercent: 5,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".terroir-photos",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        }
+      );
+    });
+
+    // ─── QUOTE PARALLAX ───
+    gsap.to("#quoteBg", {
+      yPercent: -15,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".quote",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+    // ─── NUMBERS COUNTER ANIMATION ───
+    gsap.utils.toArray('.number-value').forEach(el => {
+      const target = parseInt(el.dataset.target);
+      const isYear = el.dataset.isYear === "true";
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 80%",
+        onEnter: () => {
+          gsap.fromTo(el,
+            { opacity: 0, y: 60 },
+            { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+          );
+
+          const counter = { val: 0 };
+          gsap.to(counter, {
+            val: target,
+            duration: isYear ? 2.5 : 1.8,
+            ease: "power2.out",
+            onUpdate: () => {
+              el.textContent = Math.round(counter.val);
+            }
+          });
+        },
+        once: true
+      });
+    });
+
+    // ─── STAGGERED WINE CARDS ───
+    ScrollTrigger.create({
+      trigger: ".vinos-grid",
+      start: "top 80%",
+      onEnter: () => {
+        gsap.fromTo(".vino-card",
+          { opacity: 0, y: 60 },
+          {
+            opacity: 1, y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out"
+          }
+        );
+      },
+      once: true
+    });
+
+    // ─── ACTIVITY ROWS STAGGER ───
+    ScrollTrigger.create({
+      trigger: ".activities",
+      start: "top 80%",
+      onEnter: () => {
+        gsap.fromTo(".activity-row",
+          { opacity: 0, x: -30 },
+          {
+            opacity: 1, x: 0,
+            duration: 0.7,
+            stagger: 0.12,
+            ease: "power3.out"
+          }
+        );
+      },
+      once: true
+    });
+
+    // ─── SMOOTH ANCHOR LINKS ───
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          gsap.to(window, { scrollTo: { y: target, offsetY: 80 }, duration: 1, ease: "power2.inOut" });
+        }
+      });
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+  <!-- LENIS SMOOTH SCROLL -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script>
+    // ─── LENIS SMOOTH SCROLL ───
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+    });
+
+    // Connect Lenis to GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    // ─── CUSTOM CURSOR ON HERO ───
+    const cursor = document.getElementById('heroCursor');
+    const heroSection = document.getElementById('hero');
+
+    document.addEventListener('mousemove', (e) => {
+      gsap.to(cursor, {
+        left: e.clientX - 25,
+        top: e.clientY - 25,
+        duration: 0.12,
+        ease: "power2.out"
+      });
+    });
+
+    heroSection.addEventListener('mouseenter', () => {
+      gsap.to(cursor, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" });
+      heroSection.classList.add('cursor-active');
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+      gsap.to(cursor, { opacity: 0, scale: 0, duration: 0.2, ease: "power2.in" });
+      heroSection.classList.remove('cursor-active');
+    });
+
+    // Hide custom cursor over clickable elements
+    heroSection.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        gsap.to(cursor, { opacity: 0, scale: 0, duration: 0.2 });
+      });
+      el.addEventListener('mouseleave', () => {
+        gsap.to(cursor, { opacity: 1, scale: 1, duration: 0.2 });
+      });
+    });
+  </script>
+</body>
+</html>
