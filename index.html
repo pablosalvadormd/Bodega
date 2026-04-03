@@ -753,6 +753,311 @@
     .reveal-left { opacity: 0; transform: translateX(-40px); }
     .reveal-right { opacity: 0; transform: translateX(40px); }
     .reveal-scale { opacity: 0; transform: scale(0.95); }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE — TABLET
+       ═══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .nav { padding: 20px 32px; }
+      .hero-inner { padding: 0 32px; padding-top: 90px; }
+      .hero-headline { font-size: 48px; max-width: 480px; }
+      .hero-description { font-size: 15px; }
+      .terroir { padding: 80px 32px; }
+      .terroir-title { font-size: 36px; }
+      .terroir-content { gap: 48px; }
+      .numbers { padding: 0 48px; }
+      .number-item .number-value { font-size: 100px !important; }
+      .vinos { padding: 60px 32px; }
+      .vino-image { height: 320px; }
+      .vino-image img { height: 220px; }
+      .experiencias { padding: 80px 32px; gap: 48px; }
+      .experiencias-image { height: 500px; }
+      .quote-content { padding: 0 32px; }
+      .quote-text { font-size: 28px; }
+      .footer { padding: 48px 32px; }
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE — MOBILE
+       ═══════════════════════════════════════════ */
+    @media (max-width: 768px) {
+
+      /* NAV */
+      .nav {
+        padding: 16px 20px;
+      }
+
+      .nav-logo img { height: 36px !important; }
+
+      .nav-links {
+        gap: 16px;
+      }
+
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      .nav-cta {
+        padding: 8px 16px;
+        font-size: 12px !important;
+      }
+
+      /* HERO */
+      .hero-inner {
+        padding: 0 16px;
+        padding-top: 76px;
+      }
+
+      .hero-image-wrapper {
+        border-radius: 6px;
+      }
+
+      .hero-text {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px 0 24px;
+      }
+
+      .hero-headline {
+        font-size: 36px;
+        max-width: 100%;
+      }
+
+      .hero-right {
+        align-items: flex-start;
+        max-width: 100%;
+        gap: 16px;
+      }
+
+      .hero-description {
+        text-align: left;
+        font-size: 14px;
+      }
+
+      .hero-buttons {
+        width: 100%;
+      }
+
+      .hero-buttons .btn-primary,
+      .hero-buttons .btn-secondary {
+        flex: 1;
+        justify-content: center;
+        padding: 12px 16px;
+        font-size: 13px;
+      }
+
+      /* TERROIR */
+      .terroir {
+        padding: 64px 20px;
+        gap: 32px;
+      }
+
+      .terroir-content {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .terroir-title {
+        font-size: 30px;
+        max-width: 100%;
+      }
+
+      .terroir-text { font-size: 15px; }
+
+      /* TERROIR PHOTOS */
+      .terroir-photos {
+        flex-direction: column;
+        height: auto;
+        gap: 0;
+      }
+
+      .terroir-photos .terroir-photo-wrap {
+        height: 280px;
+      }
+
+      .terroir-photos img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin-top: 0;
+        display: block;
+      }
+
+      /* NUMBERS */
+      .numbers {
+        min-height: auto;
+        padding: 80px 20px;
+        gap: 48px;
+      }
+
+      .numbers-tagline {
+        font-size: 22px;
+      }
+
+      .numbers-grid {
+        flex-wrap: wrap;
+        gap: 32px 16px;
+      }
+
+      .number-item {
+        flex: 0 0 calc(50% - 8px);
+      }
+
+      .number-item .number-value {
+        font-size: 72px !important;
+      }
+
+      /* VINOS */
+      .vinos {
+        min-height: auto;
+        padding: 64px 20px;
+        gap: 32px;
+      }
+
+      .vinos-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .section-title { font-size: 32px; }
+
+      .vinos-grid {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .vinos-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .vino-card {
+        flex-direction: column;
+      }
+
+      .vino-image {
+        height: 220px;
+        border-radius: 6px;
+      }
+
+      .vino-image img {
+        height: 180px;
+      }
+
+      .vino-info {
+        padding: 14px 2px 0;
+      }
+
+      .vino-name { font-size: 15px; }
+      .vino-desc { font-size: 12px; line-height: 1.45; }
+
+      .vino-arrow {
+        width: 28px;
+        height: 28px;
+      }
+
+      .vino-arrow svg {
+        width: 12px;
+        height: 12px;
+      }
+
+      /* EXPERIENCIAS */
+      .experiencias {
+        flex-direction: column;
+        min-height: auto;
+        padding: 64px 20px;
+        gap: 32px;
+      }
+
+      .experiencias-desc {
+        font-size: 15px;
+        max-width: 100%;
+      }
+
+      .experiencias-image {
+        width: 100%;
+        height: 360px;
+        border-radius: 6px;
+      }
+
+      .activity-name { font-size: 15px; }
+
+      /* QUOTE */
+      .quote { height: 400px; }
+
+      .quote-content {
+        padding: 0 20px;
+      }
+
+      .quote-text {
+        font-size: 22px;
+        line-height: 1.45;
+      }
+
+      .quote-author { font-size: 12px; }
+
+      /* FOOTER */
+      .footer {
+        padding: 48px 20px 32px;
+        gap: 40px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .footer-brand {
+        max-width: 100%;
+        gap: 12px;
+      }
+
+      .footer-brand-desc {
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .footer-nav {
+        width: 100%;
+        justify-content: space-between;
+        gap: 32px;
+      }
+
+      .footer-col {
+        gap: 10px;
+      }
+
+      .footer-col a {
+        font-size: 13px;
+        line-height: 1.8;
+      }
+
+      .footer-divider {
+        margin-bottom: 0;
+      }
+
+      .footer-copy {
+        font-size: 11px;
+        color: #B5AFA8;
+        padding-top: 8px;
+        border-top: 1px solid var(--divider);
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE — SMALL MOBILE
+       ═══════════════════════════════════════════ */
+    @media (max-width: 400px) {
+      .hero-headline { font-size: 28px; }
+      .terroir-title { font-size: 26px; }
+      .section-title { font-size: 28px; }
+      .number-item .number-value { font-size: 56px !important; }
+      .numbers-tagline { font-size: 20px; }
+      .quote-text { font-size: 20px; }
+    }
   </style>
 </head>
 <body>
