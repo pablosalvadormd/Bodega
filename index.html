@@ -768,8 +768,8 @@
       .numbers { padding: 0 48px; }
       .number-item .number-value { font-size: 100px !important; }
       .vinos { padding: 60px 32px; }
-      .vino-image { height: 320px; }
-      .vino-image img { height: 220px; }
+      .vino-image { height: 340px; }
+      .vino-image img { height: 240px !important; }
       .experiencias { padding: 80px 32px; gap: 48px; }
       .experiencias-image { height: 500px; }
       .quote-content { padding: 0 32px; }
@@ -924,11 +924,6 @@
       .section-title { font-size: 32px; }
 
       .vinos-grid {
-        flex-direction: column;
-        gap: 24px;
-      }
-
-      .vinos-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px;
@@ -939,12 +934,17 @@
       }
 
       .vino-image {
-        height: 220px;
+        height: auto;
+        overflow: visible;
         border-radius: 6px;
+        padding: 24px 12px;
       }
 
       .vino-image img {
-        height: 180px;
+        height: auto;
+        width: 100%;
+        max-width: 140px;
+        object-fit: contain;
       }
 
       .vino-info {
@@ -1163,7 +1163,7 @@
     <div class="vinos-grid">
       <a class="vino-card reveal" href="#">
         <div class="vino-image">
-          <img src="img/bottle-merlot.png" alt="Merlot Reserva" style="height: 280px; width: auto; object-fit: contain;">
+          <img src="img/bottle-merlot.png" alt="Merlot Reserva">
         </div>
         <div class="vino-info">
           <div>
@@ -1177,7 +1177,7 @@
       </a>
       <a class="vino-card reveal" href="#">
         <div class="vino-image">
-          <img src="img/bottle-tannat-blend.png" alt="Tannat Merlot Cabernet Franc" style="height: 280px; width: auto; object-fit: contain;">
+          <img src="img/bottle-tannat-blend.png" alt="Tannat Merlot Cabernet Franc">
         </div>
         <div class="vino-info">
           <div>
@@ -1191,7 +1191,7 @@
       </a>
       <a class="vino-card reveal" href="#">
         <div class="vino-image">
-          <img src="img/bottle-viognier.png" alt="Viognier" style="height: 280px; width: auto; object-fit: contain;">
+          <img src="img/bottle-viognier.png" alt="Viognier">
         </div>
         <div class="vino-info">
           <div>
@@ -1205,7 +1205,7 @@
       </a>
       <a class="vino-card reveal" href="#">
         <div class="vino-image">
-          <img src="img/bottle-cabfranc.png" alt="Cabernet Franc Reserva" style="height: 280px; width: auto; object-fit: contain;">
+          <img src="img/bottle-cabfranc.png" alt="Cabernet Franc Reserva">
         </div>
         <div class="vino-info">
           <div>
