@@ -1161,7 +1161,7 @@
       <a href="#" class="text-link reveal">Ver todos los vinos →</a>
     </div>
     <div class="vinos-grid">
-      <a class="vino-card reveal" href="#">
+      <a class="vino-card" href="#">
         <div class="vino-image">
           <img src="img/bottle-merlot.png" alt="Merlot Reserva">
         </div>
@@ -1175,7 +1175,7 @@
           </div>
         </div>
       </a>
-      <a class="vino-card reveal" href="#">
+      <a class="vino-card" href="#">
         <div class="vino-image">
           <img src="img/bottle-tannat-blend.png" alt="Tannat Merlot Cabernet Franc">
         </div>
@@ -1189,7 +1189,7 @@
           </div>
         </div>
       </a>
-      <a class="vino-card reveal" href="#">
+      <a class="vino-card" href="#">
         <div class="vino-image">
           <img src="img/bottle-viognier.png" alt="Viognier">
         </div>
@@ -1203,7 +1203,7 @@
           </div>
         </div>
       </a>
-      <a class="vino-card reveal" href="#">
+      <a class="vino-card" href="#">
         <div class="vino-image">
           <img src="img/bottle-cabfranc.png" alt="Cabernet Franc Reserva">
         </div>
@@ -1402,12 +1402,11 @@
     // Phase 3: hold full-bleed image on screen (empty tween = pause)
     heroTl.to({}, { duration: 0.4 });
 
-    // Bring nav back when terroir enters
+    // ─── NAV: show when terroir enters, no action on scroll up (heroTl scrub restores it at top) ───
     ScrollTrigger.create({
       trigger: ".terroir",
       start: "top 90%",
-      onEnter: () => gsap.to("#nav", { opacity: 1, y: 0, duration: 0.4 }),
-      onLeaveBack: () => gsap.to("#nav", { opacity: 0, y: -10, duration: 0.3 }),
+      onEnter: () => gsap.to("#nav", { opacity: 1, y: 0, duration: 0.4, overwrite: "auto" }),
     });
 
     // ─── GENERAL REVEAL ANIMATIONS ───
@@ -1467,21 +1466,25 @@
       });
     });
 
-    // ─── TERROIR PHOTOS PARALLAX ───
-    gsap.utils.toArray('.terroir-photo-wrap img').forEach(img => {
-      gsap.fromTo(img,
-        { yPercent: -5 },
-        {
-          yPercent: 5,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".terroir-photos",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-          }
-        }
-      );
+    // ─── TERROIR PHOTOS PARALLAX (desktop only) ───
+    ScrollTrigger.matchMedia({
+      "(min-width: 769px)": function() {
+        gsap.utils.toArray('.terroir-photo-wrap img').forEach(img => {
+          gsap.fromTo(img,
+            { yPercent: -5 },
+            {
+              yPercent: 5,
+              ease: "none",
+              scrollTrigger: {
+                trigger: ".terroir-photos",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+              }
+            }
+          );
+        });
+      }
     });
 
     // ─── QUOTE PARALLAX ───
@@ -1525,19 +1528,18 @@
     });
 
     // ─── STAGGERED WINE CARDS ───
+    gsap.set(".vino-card", { opacity: 0, y: 60 });
     ScrollTrigger.create({
       trigger: ".vinos-grid",
       start: "top 80%",
       onEnter: () => {
-        gsap.fromTo(".vino-card",
-          { opacity: 0, y: 60 },
-          {
-            opacity: 1, y: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power3.out"
-          }
-        );
+        gsap.to(".vino-card", {
+          opacity: 1, y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          overwrite: "auto"
+        });
       },
       once: true
     });
